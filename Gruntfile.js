@@ -1,10 +1,15 @@
 'use strict';
 
+var fs = require('fs');
+
 module.exports = function (grunt) {
     require('load-grunt-tasks')(grunt);
     require('time-grunt')(grunt);
 
     grunt.initConfig({
+        clean: {
+            dist: ['dist']
+        },
         watch: {
             test: {
                 files: ['src/**/*.js', 'test/spec/**/*.js'],
@@ -33,8 +38,7 @@ module.exports = function (grunt) {
         uglify: {
             dist: {
                 files: {
-                    './dist/jolokia.min.js': ['src/jolokia.js'],
-                    './dist/drivers/jolokia.cubism.min.js': ['src/drivers/jolokia.cubism.js']
+                    'dist/jolokia.min.js': ['src/jolokia.js']
                 }
             }
         },
@@ -58,9 +62,42 @@ module.exports = function (grunt) {
         grunt.task.run(tasks);
     });
 
+    grunt.registerTask('enhance', function() {
+        var options = this.options({
+            driver: grunt.option('driver')
+        });
+
+        if (options.driver) {
+            var source = 'src/drivers/jolokia.' + options.driver + '.js';
+
+            if (!fs.existsSync(source)) {
+                throw 'Invalid driver: ' + options.driver;
+            }
+
+            var target = 'dist/jolokia.enhanced.' + options.driver + '.min.js';
+            var files = {};
+            files[target] = [
+                'src/jolokia.js',
+                source
+            ];
+
+            grunt.config('uglify.enhanced', {
+                files: files
+            });
+
+            grunt.config('concat.dist', {
+                src: ['src/jolokia.js', source],
+                dest: 'dist/jolokia.enhanced.' + options.driver + '.js'
+            });
+        }
+    });
+
     grunt.registerTask('build', [
+        'clean:dist',
         'jshint:dist',
         'karma',
+        'enhance',
+        'concat',
         'uglify'
     ]);
 

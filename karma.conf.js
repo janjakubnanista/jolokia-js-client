@@ -21,7 +21,6 @@ module.exports = function(config) {
 
             'src/jolokia.js',
 
-            'test/mock/**/*.js',
             'test/spec/**/*.js'
         ],
 
