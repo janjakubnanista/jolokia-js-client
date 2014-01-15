@@ -119,17 +119,28 @@ var Poller = (function() {
     };
 
     /**
-     * Starts the poller. The interval between two polling attempts can be optionally given or are taken from
-     * the parameter <code>fetchInterval</code> given at construction time. If no interval is given at all,
-     * 30 seconds is the default.
+     * Starts the poller.
      *
      * If the poller is already running (i.e. {@link #isRunning()} is <code>true</code> then the scheduler
      * is restarted, but only if the new interval differs from the currently active one.
      *
      * @param {Number}  interval interval in milliseconds between two polling attempts
+     *
+     * @return {Poller} This instance
      */
     Poller.prototype.start = function(interval) {
         this._start(interval);
+
+        return this;
+    };
+
+    /**
+     * Stops the poller
+     * 
+     * @return {Poller} This instance
+     */
+    Poller.prototype.stop = function() {
+        this._stop();
 
         return this;
     };
@@ -438,7 +449,7 @@ var Jolokia = (function($) {
         ajaxParams.url = options.url;
         ajaxParams.processData = false;
         ajaxParams.dataType = options.jsonp ? 'jsonp' : 'json';
-        ajaxParams.error = options.ajaxError;
+        ajaxParams.headers = $.extend({}, ajaxParams.headers, options.headers);
 
         return $.ajax(ajaxParams).then(function(response) {
             var responses = $.isArray(response) ? response: [response];

@@ -1,0 +1,171 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/usr/local/Cellar/node/0.10.21/bin/node',
+1 verbose cli   '/usr/local/bin/npm',
+1 verbose cli   'publish' ]
+2 info using npm@1.3.11
+3 info using node@v0.10.21
+4 verbose publish [ '.' ]
+5 verbose cache add [ '.', null ]
+6 verbose cache add name=undefined spec="." args=[".",null]
+7 verbose parsed url { protocol: null,
+7 verbose parsed url   slashes: null,
+7 verbose parsed url   auth: null,
+7 verbose parsed url   host: null,
+7 verbose parsed url   port: null,
+7 verbose parsed url   hostname: null,
+7 verbose parsed url   hash: null,
+7 verbose parsed url   search: null,
+7 verbose parsed url   query: null,
+7 verbose parsed url   pathname: '.',
+7 verbose parsed url   path: '.',
+7 verbose parsed url   href: '.' }
+8 silly lockFile 3a52ce78- .
+9 verbose lock . /Users/jannanista/.npm/3a52ce78-.lock
+10 verbose tar pack [ '/var/folders/4_/z2_5ll_n2nn6j75f5fmdd54c0000gn/T/npm-30274-dEuO6WAQ/1389784291088-0.1912968901451677/tmp.tgz',
+10 verbose tar pack   '.' ]
+11 verbose tarball /var/folders/4_/z2_5ll_n2nn6j75f5fmdd54c0000gn/T/npm-30274-dEuO6WAQ/1389784291088-0.1912968901451677/tmp.tgz
+12 verbose folder .
+13 silly lockFile 1f1177db-tar tar://.
+14 verbose lock tar://. /Users/jannanista/.npm/1f1177db-tar.lock
+15 silly lockFile 2f26cee6-91088-0-1912968901451677-tmp-tgz tar:///var/folders/4_/z2_5ll_n2nn6j75f5fmdd54c0000gn/T/npm-30274-dEuO6WAQ/1389784291088-0.1912968901451677/tmp.tgz
+16 verbose lock tar:///var/folders/4_/z2_5ll_n2nn6j75f5fmdd54c0000gn/T/npm-30274-dEuO6WAQ/1389784291088-0.1912968901451677/tmp.tgz /Users/jannanista/.npm/2f26cee6-91088-0-1912968901451677-tmp-tgz.lock
+17 silly lockFile 1f1177db-tar tar://.
+18 silly lockFile 1f1177db-tar tar://.
+19 silly lockFile 2f26cee6-91088-0-1912968901451677-tmp-tgz tar:///var/folders/4_/z2_5ll_n2nn6j75f5fmdd54c0000gn/T/npm-30274-dEuO6WAQ/1389784291088-0.1912968901451677/tmp.tgz
+20 silly lockFile 2f26cee6-91088-0-1912968901451677-tmp-tgz tar:///var/folders/4_/z2_5ll_n2nn6j75f5fmdd54c0000gn/T/npm-30274-dEuO6WAQ/1389784291088-0.1912968901451677/tmp.tgz
+21 verbose tar unpack /var/folders/4_/z2_5ll_n2nn6j75f5fmdd54c0000gn/T/npm-30274-dEuO6WAQ/1389784291088-0.1912968901451677/tmp.tgz
+22 silly lockFile 5d620098-91088-0-1912968901451677-package tar:///var/folders/4_/z2_5ll_n2nn6j75f5fmdd54c0000gn/T/npm-30274-dEuO6WAQ/1389784291088-0.1912968901451677/package
+23 verbose lock tar:///var/folders/4_/z2_5ll_n2nn6j75f5fmdd54c0000gn/T/npm-30274-dEuO6WAQ/1389784291088-0.1912968901451677/package /Users/jannanista/.npm/5d620098-91088-0-1912968901451677-package.lock
+24 silly lockFile 2f26cee6-91088-0-1912968901451677-tmp-tgz tar:///var/folders/4_/z2_5ll_n2nn6j75f5fmdd54c0000gn/T/npm-30274-dEuO6WAQ/1389784291088-0.1912968901451677/tmp.tgz
+25 verbose lock tar:///var/folders/4_/z2_5ll_n2nn6j75f5fmdd54c0000gn/T/npm-30274-dEuO6WAQ/1389784291088-0.1912968901451677/tmp.tgz /Users/jannanista/.npm/2f26cee6-91088-0-1912968901451677-tmp-tgz.lock
+26 silly gunzTarPerm modes [ '755', '644' ]
+27 silly gunzTarPerm extractEntry package.json
+28 silly gunzTarPerm extractEntry .npmignore
+29 silly gunzTarPerm extractEntry README.md
+30 silly gunzTarPerm extractEntry LICENSE
+31 silly gunzTarPerm extractEntry Gruntfile.js
+32 silly gunzTarPerm extractEntry karma.conf.js
+33 silly gunzTarPerm extractEntry dist/jolokia.enhanced.cubism.js
+34 silly gunzTarPerm extractEntry dist/jolokia.enhanced.cubism.min.js
+35 silly gunzTarPerm extractEntry dist/jolokia.min.js
+36 silly gunzTarPerm extractEntry src/jolokia.js
+37 silly gunzTarPerm extractEntry src/drivers/jolokia.cubism.js
+38 silly gunzTarPerm extractEntry .jshintrc
+39 silly gunzTarPerm extractEntry test/.jshintrc
+40 silly gunzTarPerm extractEntry test/lib/expect.js
+41 silly gunzTarPerm extractEntry test/lib/jquery-1.10.2.js
+42 silly gunzTarPerm extractEntry test/lib/sinon-expect.js
+43 silly gunzTarPerm extractEntry test/lib/sinon-ie.js
+44 silly gunzTarPerm extractEntry test/lib/sinon.js
+45 silly gunzTarPerm extractEntry test/spec/jolokia_test.js
+46 silly lockFile 5d620098-91088-0-1912968901451677-package tar:///var/folders/4_/z2_5ll_n2nn6j75f5fmdd54c0000gn/T/npm-30274-dEuO6WAQ/1389784291088-0.1912968901451677/package
+47 silly lockFile 5d620098-91088-0-1912968901451677-package tar:///var/folders/4_/z2_5ll_n2nn6j75f5fmdd54c0000gn/T/npm-30274-dEuO6WAQ/1389784291088-0.1912968901451677/package
+48 silly lockFile 2f26cee6-91088-0-1912968901451677-tmp-tgz tar:///var/folders/4_/z2_5ll_n2nn6j75f5fmdd54c0000gn/T/npm-30274-dEuO6WAQ/1389784291088-0.1912968901451677/tmp.tgz
+49 silly lockFile 2f26cee6-91088-0-1912968901451677-tmp-tgz tar:///var/folders/4_/z2_5ll_n2nn6j75f5fmdd54c0000gn/T/npm-30274-dEuO6WAQ/1389784291088-0.1912968901451677/tmp.tgz
+50 verbose tar pack [ '/Users/jannanista/.npm/jolokia-js-client/0.1.1/package.tgz',
+50 verbose tar pack   '/var/folders/4_/z2_5ll_n2nn6j75f5fmdd54c0000gn/T/npm-30274-dEuO6WAQ/1389784291088-0.1912968901451677/package' ]
+51 verbose tarball /Users/jannanista/.npm/jolokia-js-client/0.1.1/package.tgz
+52 verbose folder /var/folders/4_/z2_5ll_n2nn6j75f5fmdd54c0000gn/T/npm-30274-dEuO6WAQ/1389784291088-0.1912968901451677/package
+53 silly lockFile 5d620098-91088-0-1912968901451677-package tar:///var/folders/4_/z2_5ll_n2nn6j75f5fmdd54c0000gn/T/npm-30274-dEuO6WAQ/1389784291088-0.1912968901451677/package
+54 verbose lock tar:///var/folders/4_/z2_5ll_n2nn6j75f5fmdd54c0000gn/T/npm-30274-dEuO6WAQ/1389784291088-0.1912968901451677/package /Users/jannanista/.npm/5d620098-91088-0-1912968901451677-package.lock
+55 silly lockFile 3a27745b-okia-js-client-0-1-1-package-tgz tar:///Users/jannanista/.npm/jolokia-js-client/0.1.1/package.tgz
+56 verbose lock tar:///Users/jannanista/.npm/jolokia-js-client/0.1.1/package.tgz /Users/jannanista/.npm/3a27745b-okia-js-client-0-1-1-package-tgz.lock
+57 silly lockFile 5d620098-91088-0-1912968901451677-package tar:///var/folders/4_/z2_5ll_n2nn6j75f5fmdd54c0000gn/T/npm-30274-dEuO6WAQ/1389784291088-0.1912968901451677/package
+58 silly lockFile 5d620098-91088-0-1912968901451677-package tar:///var/folders/4_/z2_5ll_n2nn6j75f5fmdd54c0000gn/T/npm-30274-dEuO6WAQ/1389784291088-0.1912968901451677/package
+59 silly lockFile 3a27745b-okia-js-client-0-1-1-package-tgz tar:///Users/jannanista/.npm/jolokia-js-client/0.1.1/package.tgz
+60 silly lockFile 3a27745b-okia-js-client-0-1-1-package-tgz tar:///Users/jannanista/.npm/jolokia-js-client/0.1.1/package.tgz
+61 silly lockFile e54bf44c--jolokia-js-client-0-1-1-package /Users/jannanista/.npm/jolokia-js-client/0.1.1/package
+62 verbose lock /Users/jannanista/.npm/jolokia-js-client/0.1.1/package /Users/jannanista/.npm/e54bf44c--jolokia-js-client-0-1-1-package.lock
+63 silly lockFile e54bf44c--jolokia-js-client-0-1-1-package /Users/jannanista/.npm/jolokia-js-client/0.1.1/package
+64 silly lockFile e54bf44c--jolokia-js-client-0-1-1-package /Users/jannanista/.npm/jolokia-js-client/0.1.1/package
+65 verbose tar unpack /Users/jannanista/.npm/jolokia-js-client/0.1.1/package.tgz
+66 silly lockFile ba888c29--jolokia-js-client-0-1-1-package tar:///Users/jannanista/.npm/jolokia-js-client/0.1.1/package
+67 verbose lock tar:///Users/jannanista/.npm/jolokia-js-client/0.1.1/package /Users/jannanista/.npm/ba888c29--jolokia-js-client-0-1-1-package.lock
+68 silly lockFile 3a27745b-okia-js-client-0-1-1-package-tgz tar:///Users/jannanista/.npm/jolokia-js-client/0.1.1/package.tgz
+69 verbose lock tar:///Users/jannanista/.npm/jolokia-js-client/0.1.1/package.tgz /Users/jannanista/.npm/3a27745b-okia-js-client-0-1-1-package-tgz.lock
+70 silly gunzTarPerm modes [ '755', '644' ]
+71 silly gunzTarPerm extractEntry package.json
+72 silly gunzTarPerm extractEntry .npmignore
+73 silly gunzTarPerm extractEntry README.md
+74 silly gunzTarPerm extractEntry LICENSE
+75 silly gunzTarPerm extractEntry Gruntfile.js
+76 silly gunzTarPerm extractEntry karma.conf.js
+77 silly gunzTarPerm extractEntry .jshintrc
+78 silly gunzTarPerm extractEntry dist/jolokia.enhanced.cubism.js
+79 silly gunzTarPerm extractEntry dist/jolokia.enhanced.cubism.min.js
+80 silly gunzTarPerm extractEntry dist/jolokia.min.js
+81 silly gunzTarPerm extractEntry src/jolokia.js
+82 silly gunzTarPerm extractEntry src/drivers/jolokia.cubism.js
+83 silly gunzTarPerm extractEntry test/.jshintrc
+84 silly gunzTarPerm extractEntry test/lib/expect.js
+85 silly gunzTarPerm extractEntry test/lib/jquery-1.10.2.js
+86 silly gunzTarPerm extractEntry test/lib/sinon-expect.js
+87 silly gunzTarPerm extractEntry test/lib/sinon-ie.js
+88 silly gunzTarPerm extractEntry test/lib/sinon.js
+89 silly gunzTarPerm extractEntry test/spec/jolokia_test.js
+90 silly lockFile ba888c29--jolokia-js-client-0-1-1-package tar:///Users/jannanista/.npm/jolokia-js-client/0.1.1/package
+91 silly lockFile ba888c29--jolokia-js-client-0-1-1-package tar:///Users/jannanista/.npm/jolokia-js-client/0.1.1/package
+92 silly lockFile 3a27745b-okia-js-client-0-1-1-package-tgz tar:///Users/jannanista/.npm/jolokia-js-client/0.1.1/package.tgz
+93 silly lockFile 3a27745b-okia-js-client-0-1-1-package-tgz tar:///Users/jannanista/.npm/jolokia-js-client/0.1.1/package.tgz
+94 verbose chmod /Users/jannanista/.npm/jolokia-js-client/0.1.1/package.tgz 644
+95 verbose chown /Users/jannanista/.npm/jolokia-js-client/0.1.1/package.tgz [ 501, 20 ]
+96 silly lockFile 3a52ce78- .
+97 silly lockFile 3a52ce78- .
+98 silly publish { name: 'jolokia-js-client',
+98 silly publish   version: '0.1.1',
+98 silly publish   author: { name: 'Ján Naništa', email: 'jan.jakub.nanista@gmail.com' },
+98 silly publish   repository:
+98 silly publish    { type: 'git',
+98 silly publish      url: 'https://github.com/janjakubnanista/jolokia-js-client.git' },
+98 silly publish   devDependencies:
+98 silly publish    { grunt: '~0.4.1',
+98 silly publish      'grunt-contrib-jshint': '~0.7.1',
+98 silly publish      'grunt-contrib-uglify': '~0.2.0',
+98 silly publish      'grunt-contrib-watch': '~0.5.2',
+98 silly publish      'grunt-karma': '~0.6.2',
+98 silly publish      'karma-script-launcher': '~0.1.0',
+98 silly publish      'karma-chrome-launcher': '~0.1.2',
+98 silly publish      'karma-firefox-launcher': '~0.1.3',
+98 silly publish      'karma-html2js-preprocessor': '~0.1.0',
+98 silly publish      'karma-jasmine': '~0.1.5',
+98 silly publish      'karma-phantomjs-launcher': '~0.1.1',
+98 silly publish      'karma-spec-reporter': '0.0.6',
+98 silly publish      karma: '~0.10.9',
+98 silly publish      'jshint-stylish': '~0.1.3',
+98 silly publish      'load-grunt-tasks': '~0.2.0',
+98 silly publish      'time-grunt': '~0.2.0',
+98 silly publish      'grunt-contrib-clean': '~0.5.0',
+98 silly publish      'grunt-contrib-concat': '~0.3.0' },
+98 silly publish   engines: { node: '>=0.8.0' },
+98 silly publish   scripts: { test: 'grunt test' },
+98 silly publish   readme: 'Jolokia JavaScript client\n=========================\n\nThis is my implementation of Jolokia JavaScript client.\n',
+98 silly publish   readmeFilename: 'README.md',
+98 silly publish   description: 'Jolokia JavaScript client =========================',
+98 silly publish   bugs: { url: 'https://github.com/janjakubnanista/jolokia-js-client/issues' },
+98 silly publish   _id: 'jolokia-js-client@0.1.1',
+98 silly publish   dist: { shasum: '1de6e7b4479f26f67700154e76b7e048fa2c52dd' },
+98 silly publish   _from: '.' }
+99 verbose url raw jolokia-js-client
+100 verbose url resolving [ 'https://registry.npmjs.org/', './jolokia-js-client' ]
+101 verbose url resolved https://registry.npmjs.org/jolokia-js-client
+102 info trying registry request attempt 1 at 12:11:31
+103 http PUT https://registry.npmjs.org/jolokia-js-client
+104 http 201 https://registry.npmjs.org/jolokia-js-client
+105 verbose url raw jolokia-js-client
+106 verbose url resolving [ 'https://registry.npmjs.org/', './jolokia-js-client' ]
+107 verbose url resolved https://registry.npmjs.org/jolokia-js-client
+108 info trying registry request attempt 1 at 12:11:32
+109 http GET https://registry.npmjs.org/jolokia-js-client
+110 http 404 https://registry.npmjs.org/jolokia-js-client
+111 error 404 'jolokia-js-client' is not in the npm registry.
+111 error 404 You should bug the author to publish it
+111 error 404
+111 error 404 Note that you can also install from a
+111 error 404 tarball, folder, or http url, or git url.
+112 error System Darwin 13.0.0
+113 error command "/usr/local/Cellar/node/0.10.21/bin/node" "/usr/local/bin/npm" "publish"
+114 error cwd /Users/jannanista/Documents/workspace/jolokia-js-client
+115 error node -v v0.10.21
+116 error npm -v 1.3.11
+117 error code E404
+118 verbose exit [ 1, true ]
