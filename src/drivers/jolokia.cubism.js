@@ -81,16 +81,16 @@ var generate = (function() {
                 }
             }
 
-            this.register(requests, {
-                success: function(responses) {
-                    var errors = responses.filter(Jolokia.isError);
+            options.success = function(responses) {
+                var errors = responses.filter(Jolokia.isError);
 
-                    values.push({
-                        time: Date.now(),
-                        value: errors.length ? NaN : formatter.apply(metric, responses)
-                    });
-                }
-            });
+                values.push({
+                    time: Date.now(),
+                    value: errors.length ? NaN : formatter.apply(metric, responses)
+                });
+            };
+
+            this.register(requests, options);
 
             return metric;
         };

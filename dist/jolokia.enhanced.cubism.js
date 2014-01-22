@@ -170,7 +170,7 @@ var Jolokia = (function($) {
      * @return {Mixed}              Response value
      */
     function returnValue(response) {
-        return response.value;
+        return response[0] && response[0].value;
     }
 
     /**
@@ -449,7 +449,7 @@ var Jolokia = (function($) {
         ajaxParams.url = options.url;
         ajaxParams.processData = false;
         ajaxParams.dataType = options.jsonp ? 'jsonp' : 'json';
-        ajaxParams.error = options.ajaxError;
+        ajaxParams.headers = $.extend({}, ajaxParams.headers, options.headers);
 
         return $.ajax(ajaxParams).then(function(response) {
             var responses = $.isArray(response) ? response: [response];
@@ -770,16 +770,16 @@ var generate = (function() {
                 }
             }
 
-            this.register(requests, {
-                success: function(responses) {
-                    var errors = responses.filter(Jolokia.isError);
+            options.success = function(responses) {
+                var errors = responses.filter(Jolokia.isError);
 
-                    values.push({
-                        time: Date.now(),
-                        value: errors.length ? NaN : formatter.apply(metric, responses)
-                    });
-                }
-            });
+                values.push({
+                    time: Date.now(),
+                    value: errors.length ? NaN : formatter.apply(metric, responses)
+                });
+            };
+
+            this.register(requests, options);
 
             return metric;
         };

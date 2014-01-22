@@ -170,7 +170,7 @@ var Jolokia = (function($) {
      * @return {Mixed}              Response value
      */
     function returnValue(response) {
-        return response.value;
+        return response[0] && response[0].value;
     }
 
     /**
