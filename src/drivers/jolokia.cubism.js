@@ -44,11 +44,11 @@ var generate = (function() {
 
                     var startIndex = 0;
 
-                    while (values[startIndex].time < start && startIndex < valuesLength) {
+                    while (startIndex < valuesLength && values[startIndex].time < start) {
                         startIndex++;
                     }
 
-                    while (time < stop && time < last && startIndex < valuesLength) {
+                    while (startIndex < valuesLength && time < stop && time < last) {
                         output.push(values[startIndex].value);
                         
                         time += step;
