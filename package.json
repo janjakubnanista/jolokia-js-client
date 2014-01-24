@@ -1,10 +1,16 @@
 {
   "name": "jolokia-js-client",
   "version": "0.1.4",
+  "description": "Implementation of jolokia JMX client",
+  "keywords": ["jmx", "jolokia"],
   "author": {
     "name": "Ján Naništa",
     "email": "jan.jakub.nanista@gmail.com"
   },
+  "bugs": {
+    "url": "https://github.com/janjakubnanista/jolokia-js-client/issues"
+  },
+  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "https://github.com/janjakubnanista/jolokia-js-client.git"
