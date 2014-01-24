@@ -1,12 +1,18 @@
 'use strict';
 
 var fs = require('fs');
+var banner = fs.readFileSync(__dirname + '/header.txt').toString('utf8');
+var version = JSON.parse(fs.readFileSync(__dirname + '/package.json').toString('utf8')).version;
 
 module.exports = function (grunt) {
     require('load-grunt-tasks')(grunt);
     require('time-grunt')(grunt);
 
     grunt.initConfig({
+        yeoman: {
+            version: version,
+            banner: banner
+        },
         clean: {
             dist: ['dist']
         },
@@ -35,7 +41,20 @@ module.exports = function (grunt) {
                 src: ['test/spec/{,*/}*.js']
             }
         },
+        concat: {
+            options: {
+                banner: '<%= yeoman.banner %>'
+            },
+            dist: {
+                files: {
+                    'dist/jolokia.js': ['src/jolokia.js']
+                }
+            }
+        },
         uglify: {
+            options: {
+                banner: '<%= yeoman.banner %>'
+            },
             dist: {
                 files: {
                     'dist/jolokia.min.js': ['src/jolokia.js']
@@ -63,32 +82,33 @@ module.exports = function (grunt) {
     });
 
     grunt.registerTask('enhance', function() {
-        var options = this.options({
-            driver: grunt.option('driver')
-        });
+        var driversDir = __dirname + '/src/drivers/';
+        var drivers = fs.readdirSync(driversDir);
+        var minBuilds = {};
+        var concatBuilds = {};
 
-        if (options.driver) {
-            var source = 'src/drivers/jolokia.' + options.driver + '.js';
+        if (drivers) {
+            drivers.forEach(function(driver) {
+                driver = driver.replace(/\.js$/, '');
 
-            if (!fs.existsSync(source)) {
-                throw 'Invalid driver: ' + options.driver;
+                var source = driversDir + driver + '.js';
+                var target = 'dist/jolokia.enhanced.' + driver + '.min.js';
+
+                minBuilds[target] = [ 'src/jolokia.js', source ];
+            });
+
+            var minFiles = grunt.config.get('uglify.dist.files');
+            for (var target in minBuilds) {
+                minFiles[target] = minBuilds[target];
             }
 
-            var target = 'dist/jolokia.enhanced.' + options.driver + '.min.js';
-            var files = {};
-            files[target] = [
-                'src/jolokia.js',
-                source
-            ];
+            var concatFiles = grunt.config.get('concat.dist.files');
+            for (target in concatBuilds) {
+                concatFiles[target] = concatBuilds[target];
+            }
 
-            grunt.config('uglify.enhanced', {
-                files: files
-            });
-
-            grunt.config('concat.dist', {
-                src: ['src/jolokia.js', source],
-                dest: 'dist/jolokia.enhanced.' + options.driver + '.js'
-            });
+            grunt.config.set('uglify.dist.files', minFiles);
+            grunt.config.set('concat.dist.files', concatFiles);
         }
     });
 

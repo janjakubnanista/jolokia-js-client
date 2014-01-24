@@ -1,3 +1,14 @@
+/**
+ * Jolokia JavaScript client library
+ *
+ * Version 0.1.4
+ *
+ * GitHub repository can be found at https://github.com/janjakubnanista/jolokia-js-client
+ *
+ * Released under MIT license
+ *
+ * Created by Ján Jakub Naništa <jan.jakub.nanista@gmail.com>
+ */
 var Poller = (function() {
     'use strict';
 
@@ -164,13 +175,18 @@ var Jolokia = (function($) {
 
     /**
      * Private helper function.
-     * Returns the value attribute from server response.
+     * Returns the value attribute from server response or throws an exception
+     * in case of error.
      * 
-     * @param  {Object} response    Jolokia server response
+     * @param  {Array} responses    Jolokia server responses
      * @return {Mixed}              Response value
      */
-    function returnValue(response) {
-        return response[0] && response[0].value;
+    function returnValueOrThrow(responses) {
+        if (responses[0].status !== 200) {
+            throw responses[0];
+        }
+
+        return responses[0].value;
     }
 
     /**
@@ -490,7 +506,7 @@ var Jolokia = (function($) {
             request.path = path;
         }
 
-        return this.request(request, options).then(returnValue);
+        return this.request(request, options).then(returnValueOrThrow);
     };
 
     /**
@@ -516,7 +532,7 @@ var Jolokia = (function($) {
             request.path = path;
         }
 
-        return this.request(request, options).then(returnValue);
+        return this.request(request, options).then(returnValueOrThrow);
     };
 
     /**
@@ -544,7 +560,7 @@ var Jolokia = (function($) {
             request.arguments = args.slice(2);
         }
 
-        return this.request(request, options).then(returnValue);
+        return this.request(request, options).then(returnValueOrThrow);
     };
 
     /**
@@ -564,7 +580,7 @@ var Jolokia = (function($) {
     Jolokia.prototype.search = function(mbeanPattern, options) {
         var request = { type: 'search', mbean: mbeanPattern };
         
-        return this.request(request, options).then(returnValue);
+        return this.request(request, options).then(returnValueOrThrow);
     };
 
     /**
@@ -590,7 +606,7 @@ var Jolokia = (function($) {
      * @param version and other meta information as object
      */
     Jolokia.prototype.version = function(options) {
-        return this.request({ type: 'version' }, options).then(returnValue);
+        return this.request({ type: 'version' }, options).then(returnValueOrThrow);
     };
 
 
@@ -663,7 +679,7 @@ var Jolokia = (function($) {
             request.path = path;
         }
 
-        return this.request(request, options).then(returnValue);
+        return this.request(request, options).then(returnValueOrThrow);
     };
 
     Jolokia.prototype.register = function(request, options) {
@@ -686,112 +702,3 @@ var Jolokia = (function($) {
 })(jQuery);
 
 window.Jolokia = Jolokia;
-
-/*global Jolokia*/
-
-var generate = (function() {
-    'use strict';
-
-    function isRequest(request) {
-        return typeof(request) === 'object' && typeof(request.type) === 'string';
-    }
-
-    var generate = function(context) {
-        return function() {
-            var values = [];
-
-            var args = Array.prototype.slice.call(arguments, 0);
-            var formatter = typeof(args[0]) === 'function' ? args.shift() : function(resp) {
-                return Number(resp.value);
-            };
-
-            var options = isRequest(args[args.length - 1]) ? {} : args.pop();
-            var name = typeof(args[args.length - 1]) === 'string' ? args.pop() : options.name;
-            var requests = args;
-
-            var metric = context.metric(function (start, stop, step, callback) {
-                // Convert start and stop to milliseconds
-                start = +start;
-                stop = +stop;
-
-                var output = [];
-                var valuesLength = values.length;
-                var first = valuesLength ? values[0].time : undefined;
-                var last = valuesLength ? values[valuesLength - 1].time : undefined;
-                var time = start;
-
-                if (!valuesLength || stop < first) {
-                    while (time < stop) {
-                        output.push(NaN);
-                        time += step;
-                    }
-                } else {
-                    while (time < first && time < stop) {
-                        output.push(NaN);
-                        time += step;
-                    }
-
-                    var startIndex = 0;
-
-                    while (values[startIndex].time < start && startIndex < valuesLength) {
-                        startIndex++;
-                    }
-
-                    while (time < stop && time < last && startIndex < valuesLength) {
-                        output.push(values[startIndex].value);
-                        
-                        time += step;
-                        startIndex++;
-                    }
-
-                    while (time < stop) {
-                        output.push(NaN);
-                        time += step;
-                    }
-
-                    if (valuesLength > context.width) {
-                        values.splice(valuesLength - context.width, context.width);
-                    }
-                }
-
-                callback(null, output);
-            }, name);
-
-            if (options.delta) {
-                // Use cubism metric chaining for calculating the difference value and keep care that the
-                // metric keeps old values up to the delta value
-                var shiftedMetric = metric.shift(-options.delta);
-                metric = metric.subtract(shiftedMetric);
-
-                if (name) {
-                    metric.toString = function () {
-                        return name;
-                    };
-                }
-            }
-
-            options.success = function(responses) {
-                var errors = responses.filter(Jolokia.isError);
-
-                values.push({
-                    time: Date.now(),
-                    value: errors.length ? NaN : formatter.apply(metric, responses)
-                });
-            };
-
-            this.register(requests, options);
-
-            return metric;
-        };
-    };
-
-    return generate;
-})(jQuery);
-
-Jolokia.prototype.cubism = function(context) {
-    'use strict';
-    
-    this.metric = generate(context);
-
-    return this;
-};

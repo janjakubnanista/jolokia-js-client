@@ -2,12 +2,26 @@
 
 describe('Jolokia JavaScript Client', function () {
     beforeEach(function() {
+        this.okResponse = {
+            status: 200,
+            timestamp: Date.now(),
+            request: {},
+            value: {}
+        };
+
+        this.badResponse = {
+            status: 400,
+            timestamp: Date.now(),
+            request: {},
+            value: {}
+        };
+
         sinon.stub($, 'ajax', function(request) {
             this.request = request;
 
             var deferred = new $.Deferred();
 
-            deferred.resolve({});
+            deferred.resolve(this.response || this.okResponse);
 
             return deferred.promise();
         }.bind(this));
@@ -295,6 +309,14 @@ describe('Jolokia JavaScript Client', function () {
             expect(this.request.url).to.be('/jolokia/url/read/java.lang%3Atype%3DMemory/used/');
         });
 
+        it('should throw an exception if response status is not 200', function() {
+            this.response = this.badResponse;
+
+            expect(function() {
+                this.jolokia.get('java.lang:type=Memory', 'used');
+            }.bind(this)).to.throwException();
+        });
+
         it('should accept options', function() {
             this.jolokia.get('java.lang:type=Memory', 'used', { method: 'post' });
 
@@ -326,6 +348,14 @@ describe('Jolokia JavaScript Client', function () {
             this.jolokia.set('java.lang:type=Memory', 'used', 756);
 
             expect(this.request.url).to.be('/jolokia/url/write/java.lang%3Atype%3DMemory/used/756/');
+        });
+
+        it('should throw an exception if response status is not 200', function() {
+            this.response = this.badResponse;
+
+            expect(function() {
+                this.jolokia.set('java.lang:type=Memory', 'used', 756);
+            }.bind(this)).to.throwException();
         });
 
         it('should accept options', function() {
@@ -361,6 +391,14 @@ describe('Jolokia JavaScript Client', function () {
             expect(this.request.url).to.be('/jolokia/url/exec/java.lang%3Atype%3DMemory/clear/');
         });
 
+        it('should throw an exception if response status is not 200', function() {
+            this.response = this.badResponse;
+
+            expect(function() {
+                this.jolokia.execute('java.lang:type=Memory', 'clear');
+            }.bind(this)).to.throwException();
+        });
+
         it('should accept options', function() {
             this.jolokia.execute('java.lang:type=Memory', 'clear', { timeout: 34567 });
 
@@ -394,6 +432,14 @@ describe('Jolokia JavaScript Client', function () {
             expect(this.request.url).to.be('/jolokia/url/search/java.lang%3Atype%3D*/');
         });
 
+        it('should throw an exception if response status is not 200', function() {
+            this.response = this.badResponse;
+
+            expect(function() {
+                this.jolokia.search('java.lang:type=*');
+            }.bind(this)).to.throwException();
+        });
+
         it('should accept options', function() {
             this.jolokia.search('java.lang:type=Memory', { timeout: 34567 });
 
@@ -414,6 +460,14 @@ describe('Jolokia JavaScript Client', function () {
             expect(this.request.url).to.be('/jolokia/url/version/');
         });
 
+        it('should throw an exception if response status is not 200', function() {
+            this.response = this.badResponse;
+
+            expect(function() {
+                this.jolokia.version();
+            }.bind(this)).to.throwException();
+        });
+
         it('should accept options', function() {
             this.jolokia.version({ timeout: 34567 });
 
@@ -432,6 +486,14 @@ describe('Jolokia JavaScript Client', function () {
             this.jolokia.list();
 
             expect(this.request.url).to.be('/jolokia/url/list/');
+        });
+
+        it('should throw an exception if response status is not 200', function() {
+            this.response = this.badResponse;
+
+            expect(function() {
+                this.jolokia.list();
+            }.bind(this)).to.throwException();
         });
 
         it('should accept options', function() {

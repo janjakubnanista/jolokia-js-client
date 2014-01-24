@@ -1,0 +1,11 @@
+/**
+ * Jolokia JavaScript client library
+ *
+ * Version <%= yeoman.version %>
+ *
+ * GitHub repository can be found at https://github.com/janjakubnanista/jolokia-js-client
+ *
+ * Released under MIT license
+ *
+ * Created by Ján Jakub Naništa <jan.jakub.nanista@gmail.com>
+ */

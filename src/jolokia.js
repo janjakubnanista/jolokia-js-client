@@ -164,13 +164,18 @@ var Jolokia = (function($) {
 
     /**
      * Private helper function.
-     * Returns the value attribute from server response.
+     * Returns the value attribute from server response or throws an exception
+     * in case of error.
      * 
-     * @param  {Object} response    Jolokia server response
+     * @param  {Array} responses    Jolokia server responses
      * @return {Mixed}              Response value
      */
-    function returnValue(response) {
-        return response[0] && response[0].value;
+    function returnValueOrThrow(responses) {
+        if (responses[0].status !== 200) {
+            throw responses[0];
+        }
+
+        return responses[0].value;
     }
 
     /**
@@ -490,7 +495,7 @@ var Jolokia = (function($) {
             request.path = path;
         }
 
-        return this.request(request, options).then(returnValue);
+        return this.request(request, options).then(returnValueOrThrow);
     };
 
     /**
@@ -516,7 +521,7 @@ var Jolokia = (function($) {
             request.path = path;
         }
 
-        return this.request(request, options).then(returnValue);
+        return this.request(request, options).then(returnValueOrThrow);
     };
 
     /**
@@ -544,7 +549,7 @@ var Jolokia = (function($) {
             request.arguments = args.slice(2);
         }
 
-        return this.request(request, options).then(returnValue);
+        return this.request(request, options).then(returnValueOrThrow);
     };
 
     /**
@@ -564,7 +569,7 @@ var Jolokia = (function($) {
     Jolokia.prototype.search = function(mbeanPattern, options) {
         var request = { type: 'search', mbean: mbeanPattern };
         
-        return this.request(request, options).then(returnValue);
+        return this.request(request, options).then(returnValueOrThrow);
     };
 
     /**
@@ -590,7 +595,7 @@ var Jolokia = (function($) {
      * @param version and other meta information as object
      */
     Jolokia.prototype.version = function(options) {
-        return this.request({ type: 'version' }, options).then(returnValue);
+        return this.request({ type: 'version' }, options).then(returnValueOrThrow);
     };
 
 
@@ -663,7 +668,7 @@ var Jolokia = (function($) {
             request.path = path;
         }
 
-        return this.request(request, options).then(returnValue);
+        return this.request(request, options).then(returnValueOrThrow);
     };
 
     Jolokia.prototype.register = function(request, options) {
