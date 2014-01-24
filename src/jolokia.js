@@ -172,7 +172,7 @@ var Jolokia = (function($) {
      */
     function returnValueOrThrow(responses) {
         if (responses[0].status !== 200) {
-            throw responses[0];
+            return $.Deferred().reject(responses[0]);
         }
 
         return responses[0].value;

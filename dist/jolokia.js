@@ -1,7 +1,7 @@
 /**
  * Jolokia JavaScript client library
  *
- * Version 0.1.4
+ * Version 0.1.5
  *
  * GitHub repository can be found at https://github.com/janjakubnanista/jolokia-js-client
  *
@@ -183,7 +183,7 @@ var Jolokia = (function($) {
      */
     function returnValueOrThrow(responses) {
         if (responses[0].status !== 200) {
-            throw responses[0];
+            return $.Deferred().reject(responses[0]);
         }
 
         return responses[0].value;

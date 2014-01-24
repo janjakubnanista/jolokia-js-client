@@ -309,12 +309,13 @@ describe('Jolokia JavaScript Client', function () {
             expect(this.request.url).to.be('/jolokia/url/read/java.lang%3Atype%3DMemory/used/');
         });
 
-        it('should throw an exception if response status is not 200', function() {
+        it('should reject if response status is not 200', function() {
+            var spy = sinon.spy();
             this.response = this.badResponse;
 
-            expect(function() {
-                this.jolokia.get('java.lang:type=Memory', 'used');
-            }.bind(this)).to.throwException();
+            this.jolokia.get('java.lang:type=Memory', 'used').then(null, spy);
+
+            expect(spy.calledOnce).to.be(true);
         });
 
         it('should accept options', function() {
@@ -350,12 +351,13 @@ describe('Jolokia JavaScript Client', function () {
             expect(this.request.url).to.be('/jolokia/url/write/java.lang%3Atype%3DMemory/used/756/');
         });
 
-        it('should throw an exception if response status is not 200', function() {
+        it('should reject if response status is not 200', function() {
+            var spy = sinon.spy();
             this.response = this.badResponse;
 
-            expect(function() {
-                this.jolokia.set('java.lang:type=Memory', 'used', 756);
-            }.bind(this)).to.throwException();
+            this.jolokia.set('java.lang:type=Memory', 'used', 756).then(null, spy);
+
+            expect(spy.calledOnce).to.be(true);
         });
 
         it('should accept options', function() {
@@ -391,12 +393,13 @@ describe('Jolokia JavaScript Client', function () {
             expect(this.request.url).to.be('/jolokia/url/exec/java.lang%3Atype%3DMemory/clear/');
         });
 
-        it('should throw an exception if response status is not 200', function() {
+        it('should reject if response status is not 200', function() {
+            var spy = sinon.spy();
             this.response = this.badResponse;
 
-            expect(function() {
-                this.jolokia.execute('java.lang:type=Memory', 'clear');
-            }.bind(this)).to.throwException();
+            this.jolokia.execute('java.lang:type=Memory', 'clear').then(null, spy);
+
+            expect(spy.calledOnce).to.be(true);
         });
 
         it('should accept options', function() {
@@ -432,12 +435,13 @@ describe('Jolokia JavaScript Client', function () {
             expect(this.request.url).to.be('/jolokia/url/search/java.lang%3Atype%3D*/');
         });
 
-        it('should throw an exception if response status is not 200', function() {
+        it('should reject if response status is not 200', function() {
+            var spy = sinon.spy();
             this.response = this.badResponse;
 
-            expect(function() {
-                this.jolokia.search('java.lang:type=*');
-            }.bind(this)).to.throwException();
+            this.jolokia.search('java.lang:type=*').then(null, spy);
+
+            expect(spy.calledOnce).to.be(true);
         });
 
         it('should accept options', function() {
@@ -460,12 +464,13 @@ describe('Jolokia JavaScript Client', function () {
             expect(this.request.url).to.be('/jolokia/url/version/');
         });
 
-        it('should throw an exception if response status is not 200', function() {
+        it('should reject if response status is not 200', function() {
+            var spy = sinon.spy();
             this.response = this.badResponse;
 
-            expect(function() {
-                this.jolokia.version();
-            }.bind(this)).to.throwException();
+            this.jolokia.version().then(null, spy);
+
+            expect(spy.calledOnce).to.be(true);
         });
 
         it('should accept options', function() {
@@ -488,12 +493,13 @@ describe('Jolokia JavaScript Client', function () {
             expect(this.request.url).to.be('/jolokia/url/list/');
         });
 
-        it('should throw an exception if response status is not 200', function() {
+        it('should reject if response status is not 200', function() {
+            var spy = sinon.spy();
             this.response = this.badResponse;
 
-            expect(function() {
-                this.jolokia.list();
-            }.bind(this)).to.throwException();
+            this.jolokia.list().then(null, spy);
+
+            expect(spy.calledOnce).to.be(true);
         });
 
         it('should accept options', function() {
