@@ -92,9 +92,11 @@ module.exports = function (grunt) {
                 driver = driver.replace(/\.js$/, '');
 
                 var source = driversDir + driver + '.js';
-                var target = 'dist/jolokia.enhanced.' + driver + '.min.js';
+                var minTarget = 'dist/jolokia.enhanced.' + driver + '.min.js';
+                var concatTarget = 'dist/jolokia.enhanced.' + driver + '.js';
 
-                minBuilds[target] = [ 'src/jolokia.js', source ];
+                minBuilds[minTarget] = [ 'src/jolokia.js', source ];
+                concatBuilds[concatTarget] = [ 'src/jolokia.js', source ];
             });
 
             var minFiles = grunt.config.get('uglify.dist.files');
