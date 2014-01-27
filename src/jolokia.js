@@ -38,6 +38,12 @@ var Poller = (function() {
             jobs = {};
         };
 
+        this._execute = function() {
+            for (var id in jobs) {
+                jolokia.request(jobs[id].request, jobs[id].options);
+            }
+        };
+
         this._start = function(intervalValue) {
             if (isRunning) {
                 if (interval === intervalValue) {
@@ -50,10 +56,10 @@ var Poller = (function() {
             interval = intervalValue;
             isRunning = true;
             timer = setInterval(function() {
-                for (var id in jobs) {
-                    jolokia.request(jobs[id].request, jobs[id].options);
-                }
-            }, interval);
+                this._execute();
+            }.bind(this), interval);
+
+            this._execute();
         };
 
         this._stop = function() {

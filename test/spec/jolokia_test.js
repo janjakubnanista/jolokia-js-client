@@ -542,9 +542,12 @@ describe('Jolokia JavaScript Client', function () {
 
             this.jolokia.start(1500);
 
-            this.clock.tick(2000);
+            this.clock.tick(1000);
+            expect(this.jolokia.request.callCount).to.be(1);
 
-            expect(this.jolokia.request.calledOnce).to.be(true);
+            this.clock.tick(1000);
+            expect(this.jolokia.request.callCount).to.be(2);
+
             expect(this.jolokia.request.calledWith({
                 type: 'read',
                 mbean: 'java.lang:type=Memory'
@@ -557,13 +560,12 @@ describe('Jolokia JavaScript Client', function () {
                 mbean: 'java.lang:type=Memory'
             });
 
-            this.jolokia.start(1500);
-
             this.jolokia.unregister(id);
 
+            this.jolokia.start(1500);
             this.clock.tick(2000);
 
-            expect(this.jolokia.request.called).to.be(false);
+            expect(this.jolokia.request.callCount).to.be(0);
         });
     }); // poller
 }); // Jolokia
