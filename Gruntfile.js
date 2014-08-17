@@ -81,44 +81,10 @@ module.exports = function (grunt) {
         grunt.task.run(tasks);
     });
 
-    grunt.registerTask('enhance', function() {
-        var driversDir = __dirname + '/src/drivers/';
-        var drivers = fs.readdirSync(driversDir);
-        var minBuilds = {};
-        var concatBuilds = {};
-
-        if (drivers) {
-            drivers.forEach(function(driver) {
-                driver = driver.replace(/\.js$/, '');
-
-                var source = driversDir + driver + '.js';
-                var minTarget = 'dist/jolokia.enhanced.' + driver + '.min.js';
-                var concatTarget = 'dist/jolokia.enhanced.' + driver + '.js';
-
-                minBuilds[minTarget] = [ 'src/jolokia.js', source ];
-                concatBuilds[concatTarget] = [ 'src/jolokia.js', source ];
-            });
-
-            var minFiles = grunt.config.get('uglify.dist.files');
-            for (var target in minBuilds) {
-                minFiles[target] = minBuilds[target];
-            }
-
-            var concatFiles = grunt.config.get('concat.dist.files');
-            for (target in concatBuilds) {
-                concatFiles[target] = concatBuilds[target];
-            }
-
-            grunt.config.set('uglify.dist.files', minFiles);
-            grunt.config.set('concat.dist.files', concatFiles);
-        }
-    });
-
     grunt.registerTask('build', [
         'clean:dist',
         'jshint:dist',
         'karma',
-        'enhance',
         'concat',
         'uglify'
     ]);

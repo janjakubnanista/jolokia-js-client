@@ -1,0 +1,22 @@
+{
+  "name": "jolokia",
+  "version": "0.1.7",
+  "homepage": "https://github.com/janjakubnanista/jolokia-js-client",
+  "authors": [
+    "Jan Nanista <jan.nanista@gooddata.com>"
+  ],
+  "description": "Jolokia JavaScript interface",
+  "main": "dist/jolokia.js",
+  "keywords": [
+    "Jolokia",
+    "JMX"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
