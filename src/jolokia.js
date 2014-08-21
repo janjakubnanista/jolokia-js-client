@@ -8,7 +8,7 @@ var Poller = (function() {
     /**
      * Simple poller that allows for registration
      * of Jolokia requests that are to be peridically executed.
-     * 
+     *
      * @param {Jolokia} jolokia Instance of Jolokia
      */
     var Poller = function(jolokia) {
@@ -79,7 +79,7 @@ var Poller = (function() {
 
     /**
      * Registers a job on the poller.
-     * 
+     *
      * @param  {Object|Array}   request A request or an array of request that will be periodically executed by jolokia
      * @param  {Object}         options [optional] Options that will be passed along with requests
      * @return {String}         ID of registered job
@@ -103,7 +103,7 @@ var Poller = (function() {
 
     /**
      * Unregisters a job from the poller
-     * 
+     *
      * @param  {String} id      ID of previously registered job
      * @return {Poller}         this object
      */
@@ -115,7 +115,7 @@ var Poller = (function() {
 
     /**
      * Clears all previously registered jobs
-     * 
+     *
      * @return {Poller}         this object
      */
     Poller.prototype.clear = function() {
@@ -142,7 +142,7 @@ var Poller = (function() {
 
     /**
      * Stops the poller
-     * 
+     *
      * @return {Poller} This instance
      */
     Poller.prototype.stop = function() {
@@ -156,7 +156,7 @@ var Poller = (function() {
 
 var Jolokia = (function($) {
     'use strict';
-    
+
     var PROCESSING_PARAMS = [
         'maxDepth',
         'maxCollectionSize',
@@ -172,7 +172,7 @@ var Jolokia = (function($) {
      * Private helper function.
      * Returns the value attribute from server response or throws an exception
      * in case of error.
-     * 
+     *
      * @param  {Array} responses    Jolokia server responses
      * @return {Mixed}              Response value
      */
@@ -188,7 +188,7 @@ var Jolokia = (function($) {
      * Private helper function.
      * Serializes value to be passed over to Jolokia backend
      * following Jolokia protocol.
-     * 
+     *
      * @param  {Object} value Value to serialize
      * @return {String}       Serialized value
      */
@@ -204,7 +204,7 @@ var Jolokia = (function($) {
      * Private helper function.
      * Creates an object containing subset of properties
      * of orginal object. Only a shallow copy is performed as nothing more is required.
-     * 
+     *
      * @param  {Object}         object  Source object
      * @param  {Array<String>}  keys    Array of property names to copy from source object
      * @return {Object}                 New object containing only properties specified by keys argument
@@ -222,7 +222,7 @@ var Jolokia = (function($) {
     /**
      * Private helper function.
      * Adds URL query parameters to URL.
-     * 
+     *
      * @param {String} url    URL
      * @param {Object} params Hash containing query parameters
      */
@@ -252,7 +252,7 @@ var Jolokia = (function($) {
      * Accepts oe argument, either an URL of backend
      * to use with requests or hash of options (refer to documentation of Jolokia.request
      * for available options).
-     * 
+     *
      * @param {String|Object} options Hash of options or String URL to use with requests
      */
     var Jolokia = function(options) {
@@ -278,7 +278,7 @@ var Jolokia = (function($) {
 
     /**
      * Escape s! and /, then URI encodes string
-     * 
+     *
      * @param  {String} string      String to be escaped
      * @return {String}             Escaped string
      */
@@ -288,7 +288,7 @@ var Jolokia = (function($) {
 
     /**
      * Returns true if passed response object represents an error state
-     * 
+     *
      * @param  {Object}  response   Jolokia server response
      * @return {Boolean}            True if response object represents an error
      */
@@ -299,7 +299,7 @@ var Jolokia = (function($) {
     /**
      * Converts a value to string to be used to construct URL for GET requests.
      * Value is not escaped though, it must be done separately via Jolokia.escape method
-     * 
+     *
      * @param  {Any} value          Value to be converted
      * @return {String}             String representation of the value
      */
@@ -315,7 +315,7 @@ var Jolokia = (function($) {
      * Automatically determine HTTP request method to be used for particular request.
      * This follows the specification for jolokia requests that can be found at
      * http://www.jolokia.org/reference/html/clients.html#js-request-sync-async
-     * 
+     *
      * @param  {Object|Array} request   Jolokia request
      * @return {String}                 Lowercase HTTP method, either post or get
      */
@@ -332,7 +332,7 @@ var Jolokia = (function($) {
 
     /**
      * Create an url to be used with GET requests
-     * 
+     *
      * @param  {Object} request Jolokia request
      * @return {String}         URL to be used with HTTP GET request
      */
@@ -378,7 +378,7 @@ var Jolokia = (function($) {
 
     /**
      * Central method used to create HTTP requests
-     * 
+     *
      * @param  {Object|Array}   request     Jolokia request object or an array of objects
      * @param  {Object}         options     [optional] Additional options for request
      * @return {jQuery.Promise} jQuery jXHR promise resolved with an array of jolokia server response objects
@@ -404,7 +404,7 @@ var Jolokia = (function($) {
             if ($.isArray(request)) {
                 throw new Error('Cannot use GET with bulk requests');
             }
-            
+
             if (request.type.match(/read/i) && $.isArray(request.attribute)) {
                 throw new Error('Cannot use GET for read with multiple attributes');
             }
@@ -412,7 +412,7 @@ var Jolokia = (function($) {
             if (request.target) {
                 throw new Error('Cannot use GET request with proxy mode');
             }
-            
+
             if (request.config) {
                 throw new Error('Cannot use GET with request specific config');
             }
@@ -462,9 +462,9 @@ var Jolokia = (function($) {
         ajaxParams.dataType = options.jsonp ? 'jsonp' : 'json';
         ajaxParams.headers = $.extend({}, ajaxParams.headers, options.headers);
 
-        return $.ajax(ajaxParams).then(function(response) {
+        return this.ajax(ajaxParams).then(function(response) {
             var responses = $.isArray(response) ? response: [response];
-            
+
             if (typeof(options.success) === 'function') {
                 options.success.call(this, responses);
             }
@@ -473,16 +473,20 @@ var Jolokia = (function($) {
         }.bind(this), options.error);
     };
 
+    Jolokia.prototype.ajax = function(options) {
+        return $.ajax(options);
+    };
+
     /**
      * Get one or more attributes
      *
      * @param   {String} mbean name of MBean to query. Can be a pattern.
-     * @param   {String} attribute      attribute name. If an array, multiple attributes are fetched. 
+     * @param   {String} attribute      attribute name. If an array, multiple attributes are fetched.
      *                                  If <code>null</code>, all attributes are fetched.
-     * @param   {String}    path        optional path within the return value. 
+     * @param   {String}    path        optional path within the return value.
      *                                  For multi-attribute fetch, the path is ignored.
      * @param   {Object}    options     options passed to Jolokia.request()
-     * 
+     *
      * @return  {jQuery.Promise}
      */
     Jolokia.prototype.get =  function(mbean, attribute, path, options) {
@@ -543,7 +547,7 @@ var Jolokia = (function($) {
      */
     Jolokia.prototype.execute = function(mbean, operation) {
         var request = { type: 'exec', mbean: mbean, operation: operation };
-        
+
         var options,
             args = Array.prototype.slice.call(arguments, 0);
 
@@ -574,7 +578,7 @@ var Jolokia = (function($) {
      */
     Jolokia.prototype.search = function(mbeanPattern, options) {
         var request = { type: 'search', mbean: mbeanPattern };
-        
+
         return this.request(request, options).then(returnValueOrThrow);
     };
 
