@@ -1,7 +1,7 @@
 /**
  * Jolokia JavaScript client library
  *
- * Version 1.0.0
+ * Version 1.0.1
  *
  * GitHub repository can be found at https://github.com/janjakubnanista/jolokia-js-client
  *
