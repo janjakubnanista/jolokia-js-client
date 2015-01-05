@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "main": "dist/jolokia.js",
   "homepage": "https://github.com/janjakubnanista/jolokia-js-client",
+  "repository": {
+      "type": "git",
+      "url": "git://github.com/janjakubnanista/jolokia-js-client.git"
+  },
   "authors": [
     "Ján Jakub Naništa <jan.jakub.nanista@gmail.com>"
   ],
