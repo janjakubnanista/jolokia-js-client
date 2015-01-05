@@ -13,7 +13,7 @@ module.exports = function(config) {
         logLevel: config.LOG_INFO,
         autoWatch: false,
         singleRun: true,
-        browsers: ['Chrome'],
+        browsers: ['Firefox', 'PhantomJS'],
         reporters: ['spec']
     });
 };
