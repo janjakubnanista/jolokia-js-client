@@ -8,7 +8,7 @@
   "eqeqeq": true,
   "immed": true,
   "indent": 4,
-  "latedef": true,
+  "latedef": false,
   "newcap": true,
   "noarg": true,
   "quotmark": "single",
@@ -17,10 +17,5 @@
   "unused": true,
   "strict": true,
   "trailing": true,
-  "smarttabs": true,
-  "globals": {
-    "cubism": false,
-    "d3": false,
-    "jQuery": false
-  }
+  "smarttabs": true
 }
