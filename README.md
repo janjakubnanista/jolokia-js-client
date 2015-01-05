@@ -3,7 +3,7 @@ Jolokia JavaScript client
 
 JavaScript client for Jolokia server for both Node.js and browser.
 
-[![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][depstat-image]][depstat-url]
+[![Build Status](https://travis-ci.org/janjakubnanista/jolokia-js-client.svg?branch=master)](https://travis-ci.org/janjakubnanista/jolokia-js-client)
 
 To install via npm, please run
 
@@ -14,7 +14,7 @@ Or via bower
     bower install jolokia
 
 **Important** If you use this library in browser without using browserify or equivalent tool,
-please use `dist/jolokia.js` (or `dist/jolokia.min.js`) instead of `main` 
+please use `dist/jolokia.js` (or `dist/jolokia.min.js`) instead of `main`
 file declared in `package.json`.
 
 **Important** If you use this library in browser, you need to include your own jQuery.
@@ -80,9 +80,9 @@ Perform arbitrary JMX request or requests.
 
 `request.value` *`Object`* Value of bean attribute, used for `write` requests.
 
-`request.operation` *`String`* Name of bean operation, used for `exec` requests. 
+`request.operation` *`String`* Name of bean operation, used for `exec` requests.
 
-`request.arguments` *`Array`* Arguments for operation, used for `exec` requests. 
+`request.arguments` *`Array`* Arguments for operation, used for `exec` requests.
 
 `request.path` *`String`* Path to append to url to access inner attributes of responses. See official documentation for more information on accessing inner paths.
 
@@ -117,5 +117,3 @@ Sharthand method for creating `search` requests.
 Sharthand method for creating `version` requests.
 
 **Returns** Promise resolved with Jolokia agent version definition.
-
-
