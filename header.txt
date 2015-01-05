@@ -1,7 +1,7 @@
 /**
  * Jolokia JavaScript client library
  *
- * Version <%= yeoman.version %>
+ * Version <%= version %>
  *
  * GitHub repository can be found at https://github.com/janjakubnanista/jolokia-js-client
  *
