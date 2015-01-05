@@ -1,10 +1,14 @@
 {
-  "name": "jolokia-js-client",
-  "version": "0.1.8",
+  "name": "jolokia",
+  "version": "1.0.0",
   "description": "Implementation of jolokia JMX client",
-  "keywords": ["jmx", "jolokia"],
+  "main": "src/node/jolokia.js",
+  "keywords": [
+    "jmx",
+    "jolokia"
+  ],
   "author": {
-    "name": "Ján Naništa",
+    "name": "Ján Jakub Naništa",
     "email": "jan.jakub.nanista@gmail.com"
   },
   "bugs": {
@@ -34,7 +38,7 @@
     "time-grunt": "~0.2.0"
   },
   "engines": {
-    "node": ">=0.8.0"
+    "node": ">=0.10.0"
   },
   "scripts": {
     "prepublish": "rm -rf dist && gulp build",

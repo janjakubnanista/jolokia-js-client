@@ -1,22 +1,25 @@
 {
   "name": "jolokia",
-  "version": "0.1.8",
+  "version": "1.0.0",
+  "main": "dist/jolokia.js",
   "homepage": "https://github.com/janjakubnanista/jolokia-js-client",
   "authors": [
-    "Jan Nanista <jan.nanista@gooddata.com>"
+    "Ján Jakub Naništa <jan.jakub.nanista@gmail.com>"
   ],
   "description": "Jolokia JavaScript interface",
-  "main": "dist/jolokia.js",
   "keywords": [
     "Jolokia",
     "JMX"
   ],
   "license": "MIT",
   "ignore": [
-    "**/.*",
-    "node_modules",
-    "bower_components",
+    "src",
     "test",
-    "tests"
+    "node_modules",
+    "gulpfile.js",
+    "header.txt",
+    "karma.conf.js",
+    ".jshintrc",
+    ".gitignore"
   ]
 }
