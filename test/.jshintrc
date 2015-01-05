@@ -24,17 +24,6 @@
     "before": false,
     "beforeEach": false,
     "after": false,
-    "afterEach": false,
-
-    "expect": false,
-    "sinon": false,
-
-    "App": false,
-    "DS": false,
-    "Ember": false,
-    "Em": false,
-    "Jolokia": false,
-    "$": false,
-    "Q": false
+    "afterEach": false
   }
 }
