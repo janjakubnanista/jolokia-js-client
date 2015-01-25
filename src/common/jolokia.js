@@ -167,7 +167,7 @@ Jolokia.prototype.request = function (request, options) {
     if (method === 'get') {
         options.url += this.constructUrl(request, options);
     } else {
-        options.data = JSON.stringify(utils.extend({}, options.data, request));
+        options.data = JSON.stringify(request);
     }
 
     // Add request method and URL
