@@ -9,9 +9,7 @@ var Jolokia = module.exports = function() {
 	BaseJolokia.apply(this, arguments);
 };
 
-// Inherit from BaseJolokia
-Jolokia.prototype = Object.create(BaseJolokia.prototype);
-Jolokia.prototype.constructor = Jolokia;
+utils.inherit(Jolokia, BaseJolokia);
 
 Jolokia.prototype.httpRequest = function(options) {
 	options.processData = false;

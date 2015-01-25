@@ -1,6 +1,6 @@
 {
   "name": "jolokia",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "main": "dist/jolokia.js",
   "homepage": "https://github.com/janjakubnanista/jolokia-js-client",
   "repository": {

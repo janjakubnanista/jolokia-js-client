@@ -49,6 +49,56 @@ describe('Jolokia', function () {
         delete this.jolokia;
     });
 
+    describe('statics', function() {
+        describe('isError', function() {
+            it('should return false if status property of response object is 200', function() {
+                expect(Jolokia.isError({ status: 200 })).to.be(false);
+            });
+
+            it('should return true if status property of response object is not 200', function() {
+                expect(Jolokia.isError({ status: 300 })).to.be(true);
+                expect(Jolokia.isError({ status: 400 })).to.be(true);
+                expect(Jolokia.isError({ status: 500 })).to.be(true);
+            });
+        });
+
+        describe('escape', function() {
+            it('should escape ! in URL and encode', function() {
+                expect(Jolokia.escape('bean:some!weird!bean!')).to.be('bean%3Asome!!weird!!bean!!');
+            });
+
+            it('should escape / in URL and encode', function() {
+                expect(Jolokia.escape('bean:some/weird/bean/')).to.be('bean%3Asome!%2Fweird!%2Fbean!%2F');
+            });
+
+            it('should escape " in URL and encode', function() {
+                expect(Jolokia.escape('bean:some"weird"bean"')).to.be('bean%3Asome!%22weird!%22bean!%22');
+            });
+        });
+
+        describe('toString', function() {
+            it('should turn null into [null]', function() {
+                expect(Jolokia.toString(null)).to.be('[null]');
+            });
+
+            it('should turn undefined into [null]', function() {
+                expect(Jolokia.toString(undefined)).to.be('[null]');
+            });
+
+            it('should turn empty string into string ""', function() {
+                expect(Jolokia.toString('')).to.be('""');
+            });
+
+            it('should return original string', function() {
+                expect(Jolokia.toString('ole')).to.be('ole');
+            });
+
+            it('should turn array into comma separated list of values converted by Jolokia.toString', function() {
+                expect(Jolokia.toString(['ole', '', null])).to.be('ole,"",[null]');
+            });
+        });
+    });
+
     describe('constructor', function() {
         it('should accept options hash', function() {
             var jolokia = new Jolokia({ url: this.url });

@@ -1,7 +1,7 @@
 /**
  * Jolokia JavaScript client library
  *
- * Version 1.0.3
+ * Version 1.0.4
  *
  * GitHub repository can be found at https://github.com/janjakubnanista/jolokia-js-client
  *
@@ -76,9 +76,7 @@ return /******/ (function(modules) { // webpackBootstrap
 		BaseJolokia.apply(this, arguments);
 	};
 
-	// Inherit from BaseJolokia
-	Jolokia.prototype = Object.create(BaseJolokia.prototype);
-	Jolokia.prototype.constructor = Jolokia;
+	utils.inherit(Jolokia, BaseJolokia);
 
 	Jolokia.prototype.httpRequest = function(options) {
 		options.processData = false;
@@ -144,13 +142,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 	/**
-	 * Escape s! and /, then URI encodes string
+	 * Escapes !, " and /, then URI encodes string
 	 *
 	 * @param  {String} string      String to be escaped
 	 * @return {String}             Escaped string
 	 */
 	Jolokia.escape = function(string) {
-	    return encodeURIComponent(string.replace(/[!\/]/, '!$1'));
+	    return encodeURIComponent(string.replace(/(["!\/])/g, '!$1'));
 	};
 
 	/**
@@ -624,6 +622,20 @@ return /******/ (function(modules) { // webpackBootstrap
 		}
 
 		throw new Error('Unable to find window.btoa() or Buffer to convert to Base64');
+	};
+
+	exports.inherit = function(subClass, superClass) {
+		// Inherit from BaseJolokia
+		subClass.prototype = Object.create(superClass.prototype);
+		subClass.prototype.constructor = subClass;
+
+		for (var i in superClass) {
+			if (typeof(superClass[i]) === 'function') {
+				subClass[i] = superClass[i];
+			}
+		}
+
+		return subClass;
 	};
 
 

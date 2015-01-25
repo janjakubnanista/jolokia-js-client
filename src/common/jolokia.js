@@ -24,13 +24,13 @@ var Jolokia = module.exports = function(options) {
 };
 
 /**
- * Escape s! and /, then URI encodes string
+ * Escapes !, " and /, then URI encodes string
  *
  * @param  {String} string      String to be escaped
  * @return {String}             Escaped string
  */
 Jolokia.escape = function(string) {
-    return encodeURIComponent(string.replace(/[!\/]/, '!$1'));
+    return encodeURIComponent(string.replace(/(["!\/])/g, '!$1'));
 };
 
 /**

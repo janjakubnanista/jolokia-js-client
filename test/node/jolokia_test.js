@@ -21,6 +21,20 @@ describe('Jolokia in Node.js', function() {
 		delete this.jolokia;
 	});
 
+	describe('statics', function() {
+		it('should have isError method', function() {
+			expect(Jolokia.isError).to.be.a(Function);
+		});
+
+		it('should have escape method', function() {
+			expect(Jolokia.escape).to.be.a(Function);
+		});
+
+		it('should have toString method', function() {
+			expect(Jolokia.toString).to.be.a(Function);
+		});
+	});
+
 	describe('httpRequest', function() {
 		it('should call request[method]', function() {
 			this.jolokia.httpRequest({

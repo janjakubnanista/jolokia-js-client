@@ -49,3 +49,17 @@ exports.base64encode = function(string) {
 
 	throw new Error('Unable to find window.btoa() or Buffer to convert to Base64');
 };
+
+exports.inherit = function(subClass, superClass) {
+	// Inherit from BaseJolokia
+	subClass.prototype = Object.create(superClass.prototype);
+	subClass.prototype.constructor = subClass;
+
+	for (var i in superClass) {
+		if (typeof(superClass[i]) === 'function') {
+			subClass[i] = superClass[i];
+		}
+	}
+
+	return subClass;
+};
