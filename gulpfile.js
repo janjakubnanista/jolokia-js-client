@@ -18,6 +18,10 @@ gulp.task('build', function() {
 			externals: {
 				jquery: 'var $'
 			},
+			node: {
+				process: false,
+				buffer: false
+			},
 			output: {
 				library: 'Jolokia',
 				libraryTarget: 'umd'

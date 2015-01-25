@@ -1,6 +1,6 @@
 {
   "name": "jolokia",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Implementation of jolokia JMX client",
   "main": "src/node/jolokia.js",
   "keywords": [
