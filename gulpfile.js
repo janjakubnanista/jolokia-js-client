@@ -68,7 +68,7 @@ gulp.task('release', function(done) {
 
 	var semver = 'v' + version,
 		message = '"Release ' + version + '"',
-		commitAndTag = 'git commit -m ' + message + ' && git tag -a ' + semver + ' -m ' + message,
+		commitAndTag = 'git add . && git commit -m ' + message + ' && git tag -a ' + semver + ' -m ' + message,
 		publishAndPush = 'npm publish && git push origin head --tags';
 
 	exec(commitAndTag, function(error, stdout, stderr) {
