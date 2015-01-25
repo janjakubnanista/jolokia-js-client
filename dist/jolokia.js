@@ -1,7 +1,7 @@
 /**
  * Jolokia JavaScript client library
  *
- * Version 1.0.4
+ * Version 1.0.6
  *
  * GitHub repository can be found at https://github.com/janjakubnanista/jolokia-js-client
  *
@@ -285,7 +285,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    if (method === 'get') {
 	        options.url += this.constructUrl(request, options);
 	    } else {
-	        options.data = JSON.stringify(utils.extend({}, options.data, request));
+	        options.data = JSON.stringify(request);
 	    }
 
 	    // Add request method and URL
