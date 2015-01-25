@@ -15,6 +15,7 @@ Jolokia.prototype.constructor = Jolokia;
 
 Jolokia.prototype.httpRequest = function(options) {
 	options.processData = false;
+	options.dataType = options.dataType || 'json';
 
 	if (options.auth) {
 		var username = options.auth.username,

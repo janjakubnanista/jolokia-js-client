@@ -19,7 +19,19 @@ describe('Jolokia - browser version', function() {
 		it('should add processData: false to options', function() {
 			this.jolokia.httpRequest({});
 
-			expect($.ajax.withArgs({ processData: false })).to.be.calledOnce();
+			expect($.ajax.withArgs({ processData: false, dataType: 'json' })).to.be.calledOnce();
+		});
+
+		it('should add dataType: json to options if not there', function() {
+			this.jolokia.httpRequest({});
+
+			expect($.ajax.withArgs({ processData: false, dataType: 'json' })).to.be.calledOnce();
+		});
+
+		it('should not overwrite specified dataType', function() {
+			this.jolokia.httpRequest({ dataType: 'xml' });
+
+			expect($.ajax.withArgs({ processData: false, dataType: 'xml' })).to.be.calledOnce();
 		});
 
 		it('should add authorization headers', function() {
@@ -32,6 +44,7 @@ describe('Jolokia - browser version', function() {
 
 			expect($.ajax.withArgs({
 				processData: false,
+				dataType: 'json',
 				xhrFields: {
 					withCredentials: true
 				},
